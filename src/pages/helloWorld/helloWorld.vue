@@ -32,27 +32,10 @@
         })
         Cookies.set('testCookie', 1)
       },
-      ngOnInit() {
-        const that = this;
-        window.onresize = function () {
-          if (!that.checkFull()) {
-            console.log('你按下了Esc');
-          }
-        };
-      },
-      checkFull() {
-        let isFull = true;
-        isFull = document.fullscreenEnabled || document.webkitIsFullScreen;
-        console.log('isFull',isFull)
-        if (isFull === undefined) {
-          isFull = false;
-        }
-        return isFull;
-      }
     },
     mounted(){
        this.testApi()
-       this.ngOnInit()
+       console.log($('div').length)
     }
   }
 </script>

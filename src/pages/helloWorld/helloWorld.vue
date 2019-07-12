@@ -13,6 +13,7 @@
   import Test1 from '../../components/test1'
   import Test2 from '../../components/test2'
   import TestApi from '../../service/api/test'
+
   export default {
     name: 'HelloWorld',
     components: {
@@ -26,7 +27,7 @@
     },
     methods: {
       async testApi() {
-        await TestApi.testApi({
+        let res = await TestApi.testApi({
           kind: 1,
           id: 613
         })
@@ -41,7 +42,8 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="less">
+<style lang="less">
+  @import './test.less';
   h1, h2 {
     font-weight: normal;
   }
@@ -55,16 +57,5 @@
   }
   a {
     color: #42b983;
-  }
-  .test-less{
-    width: 100px;
-    height:100px;
-    border:1px solid #ccc;
-    text-align: center;
-    line-height: 100px;
-    margin:0 auto;
-    span{
-       color:pink;
-    }
   }
 </style>

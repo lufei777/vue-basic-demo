@@ -20,6 +20,10 @@ Vue.use(ElementUI)
 // import { Button } from 'ant-design-vue';
 // Vue.use(Button)
 
+import moment from 'moment'
+Vue.prototype.$moment = moment;//赋值使用
+moment.locale('zh-cn');//需要汉化
+
 Vue.use(VueRouter)
 let router = new VueRouter({
     routes

@@ -62,20 +62,20 @@ axios.interceptors.response.use(
     } catch (err) {
        resetLoading();
     }
-
+    // debugger
     // Do something with response data
     if (response && process.server && response.config) {
       // 服务端打印日志
       console.log("=====================seperate line=====================");
       console.log("axios from server url:", response.config.url);
     }
+
     // 非接口类 请求，直接返回
     if (!response) response = "";
-    if (!response || !response.data || !response.data.code) return response;
+    if (!response || !response.data || !response.status) return response;
 
-    let data = response.data.data || "";
-    let code = response.data.code;
-
+    let data = response.data || "";
+    let code = response.status;
     // token超时需要重新刷新token, 600测试用
     // token超时直接退出
     if (code == 301) {

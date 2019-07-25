@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <img src="../static/image/logo.png">
+    <!--<img src="../static/image/logo.png">-->
+
     <router-view/>
   </div>
 </template>
@@ -11,13 +12,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+@import url('./less/index.less');
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #606266;
 }
 </style>

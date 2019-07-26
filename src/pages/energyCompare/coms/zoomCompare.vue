@@ -121,7 +121,6 @@
         this.myChart = echarts.init(this.$refs.myChart);
         let titleText =`A3${this.floorNameList}${this.energy[0].name}趋势对比`
         let legendData = this.floorNameList.split("、")
-        console.log('lendata',legendData)
         let xAxis= res[0].map((item)=>item.time.slice(0,10))
         let yAxis=res[0] && res[0][0]&& res[0][0].unit
         let series=[]

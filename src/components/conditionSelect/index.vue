@@ -77,7 +77,7 @@
         curDateType:'月',
         dateType:'month',
         radio:'0',
-        startTime:new Date(),
+        startTime:new Date(new Date().getTime()-30*24*60*60*1000),
         lastTime:new Date(),
         showLastTime:false,
       }
@@ -85,7 +85,7 @@
     computed: {
       ...mapState({
         activeIndex:state => state.conditionSelect.activeIndex,
-      })
+      }),
     },
     watch:{},
     methods: {

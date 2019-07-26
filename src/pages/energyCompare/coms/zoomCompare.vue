@@ -1,7 +1,7 @@
 <template>
   <div class="zoom-compare flex">
       <div class="left-zoom-nav">
-        <ZoomNavigation :floorList="floorList"/>
+        <ZoomNavigation :floorList="floorList" :defaultChecked="defaultChecked"/>
       </div>
       <div class="right-content">
         <ConditionSelect :isMultiple="false" :isGroup="false" />
@@ -34,7 +34,7 @@
         },
         myChart:'',
         curPage:1,
-
+        defaultChecked:[]
       }
     },
     computed: {
@@ -77,6 +77,8 @@
         })
         tmp[0].nodes=res
         this.floorList = tmp
+        this.defaultChecked =[{id:res[0].floorId,name:res[0].floor},
+                              {id:res[1].floorId,name:res[1].floor}]
       },
       async getZoomCompareChart(){
         let res =  await CommonApi.getZoomCompareChart(this.commonParams)
@@ -119,8 +121,9 @@
         this.myChart = echarts.init(this.$refs.myChart);
         let titleText =`A3${this.floorNameList}${this.energy[0].name}趋势对比`
         let legendData = this.floorNameList.split("、")
+        console.log('lendata',legendData)
         let xAxis= res[0].map((item)=>item.time.slice(0,10))
-        let yAxis=res[0][0].unit
+        let yAxis=res[0] && res[0][0]&& res[0][0].unit
         let series=[]
         let tmp
         res.map((item,index)=>{
@@ -170,8 +173,10 @@
         location.href=url+params
       }
     },
-    mounted(){
-      this.getAllFloor()
+    async mounted(){
+      await this.getAllFloor()
+      this.handleNavCanCheck(this.defaultChecked)
+      this.getData()
     }
   }
 </script>

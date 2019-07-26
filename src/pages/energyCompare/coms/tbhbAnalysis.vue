@@ -1,7 +1,7 @@
 <template>
   <div class="tbhb-analysis flex">
     <div class="left-zoom-nav">
-      <ZoomNavigation :floorList="floorList"/>
+      <ZoomNavigation :floorList="floorList" :defaultChecked="defaultChecked" />
     </div>
     <div class="right-content">
       <ConditionSelect :isMultiple="false" :isGroup="false"/>
@@ -65,7 +65,8 @@
         myChart:'',
         tableData:{
           total:0
-        }
+        },
+        defaultChecked:[]
       }
     },
     computed: {
@@ -102,6 +103,7 @@
         })
         tmp[0].nodes=res
         this.floorList = tmp
+        this.defaultChecked =[{id:res[0].floorId,name:res[0].floor}]
       },
       handleNavCanCheck(checkNode){
         if(checkNode.length<1){
@@ -112,7 +114,7 @@
           this.floorList[0].nodes.map((item)=>{
             item.disabled=true
             checkNode.map((check)=>{
-              if(item.floorId==check.floorId){
+              if(item.floorId==(check.floorId || check.id)){
                 item.disabled=false
               }
             })
@@ -165,7 +167,6 @@
           data:res.value.map((item)=>item.tbzz)
         }
         let data=res.value.map((item)=>item.hbzz)
-        data[0]=100
         let hbzz={
           name:'综合能耗环比增长率',
           type:'line',
@@ -199,7 +200,6 @@
             {
               type: 'value',
               name: res.unit,
-              min:0
             },
           ],
           series
@@ -224,8 +224,10 @@
         location.href=url+params
       }
     },
-    mounted(){
-      this.getAllFloor()
+    async mounted(){
+       await this.getAllFloor()
+       this.handleNavCanCheck(this.defaultChecked)
+       this.getData()
     }
   }
 </script>

@@ -2,7 +2,7 @@ import moment from 'moment'
 const state = {
   selectType:'2',
   radioType:0,
-  startTime:moment(new Date()).format('YYYY-MM'),
+  startTime:moment(new Date(new Date().getTime()-30*24*60*60*1000)).format('YYYY-MM'),
   lastTime:'',
   checkedFloorList:[],
   energy:[{
@@ -11,7 +11,7 @@ const state = {
   }],
   tbhbSelectType:'2',
   tbhbRadioType:0,
-  tbhbStartTime:moment(new Date()).format('YYYY-MM'),
+  tbhbStartTime:moment(new Date(new Date().getTime()-30*24*60*60*1000)).format('YYYY-MM'),
   tbhbLastTime:'',
   tbhbCheckedFloorList:[],
   tbhbEnergy:[{
@@ -20,7 +20,7 @@ const state = {
   }],
   typeSelectType:'2',
   typeRadioType:0,
-  typeStartTime:moment(new Date()).format('YYYY-MM'),
+  typeStartTime:moment(new Date(new Date().getTime()-30*24*60*60*1000)).format('YYYY-MM'),
   typeLastTime:'',
   typeCheckedFloorList:[],
   typeEnergy:[{

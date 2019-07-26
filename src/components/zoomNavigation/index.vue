@@ -7,6 +7,7 @@
       node-key="floorId"
       show-checkbox
       :default-expanded-keys="[1]"
+      :default-checked-keys="defaultCheckedKey"
       @check-change="handleCheckChange"
       ref="navTree"
     >
@@ -21,7 +22,7 @@
     name:'ZoomNavigation',
     components: {
     },
-    props:['floorList'],
+    props:['floorList','defaultChecked'],
     data () {
       return {
         treeProps:{
@@ -33,7 +34,21 @@
     computed: {
       ...mapState({
         activeIndex:state => state.conditionSelect.activeIndex,
-      })
+      }),
+      defaultCheckedKey(){
+        return this.defaultChecked.map((item)=>item.id)
+      }
+    },
+    watch:{
+      defaultChecked(){
+        if(this.activeIndex==1){
+          this.$store.commit('conditionSelect/checkedFloorList',this.defaultChecked)
+        }else if(this.activeIndex==2){
+          this.$store.commit('conditionSelect/tbhbCheckedFloorList',this.defaultChecked)
+        }else{
+          this.$store.commit('conditionSelect/typeCheckedFloorList',this.defaultChecked)
+        }
+      }
     },
     methods: {
       handleCheckChange(){

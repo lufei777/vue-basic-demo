@@ -7,7 +7,6 @@
         <el-menu-item index="3">能耗类型对比</el-menu-item>
       </el-menu>
     </div>
-    <router-view></router-view>
     <div class="right-panel flex">
       <keep-alive>
         <component :is="componentType()"></component>

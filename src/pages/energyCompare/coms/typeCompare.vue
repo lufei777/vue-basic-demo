@@ -1,7 +1,7 @@
 <template>
   <div class="type-compare flex">
     <div class="left-zoom-nav">
-      <ZoomNavigation :floorList="floorList" />
+      <ZoomNavigation :floorList="floorList" :defaultChecked="defaultChecked" />
     </div>
     <div class="right-content">
       <ConditionSelect :isMultiple="true" :isGroup="true" />
@@ -35,7 +35,7 @@
         showChart:false,
         myChart:'',
         curPage:1,
-
+        defaultChecked:[]
       }
     },
     computed: {
@@ -83,6 +83,7 @@
         })
         tmp[0].nodes=res
         this.floorList = tmp
+        this.defaultChecked =[{id:res[0].floorId,name:res[0].floor}]
       },
       async getTypeChart(){
         let res =  await CommonApi.getTypeChart(this.commonParams)
@@ -176,7 +177,7 @@
           this.floorList[0].nodes.map((item)=>{
             item.disabled=true
             checkNode.map((check)=>{
-              if(item.floorId==check.floorId){
+              if(item.floorId==(check.floorId || check.id)){
                 item.disabled=false
               }
             })
@@ -194,7 +195,9 @@
       }
     },
     async mounted(){
-     await this.getAllFloor()
+      await this.getAllFloor()
+      this.handleNavCanCheck(this.defaultChecked)
+      this.getData()
     }
   }
 </script>

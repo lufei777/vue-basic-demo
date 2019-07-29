@@ -150,7 +150,12 @@
       },
       initChart(res) {
         this.myChart = echarts.init(this.$refs.myChart);
-        let xAxis = res.value.map((item)=>item.date.slice(0,10))
+        let xAxis
+        if(this.selectType==3 && this.radioType==0){
+          xAxis = res.value.map((item)=>item.date.slice(0,16))
+        }else{
+          xAxis = res.value.map((item)=>item.date.slice(0,10))
+        }
         let dqzh={
           name:'当期综合能耗',
           type:'bar',
@@ -254,6 +259,9 @@
     }
     .export-btn{
       margin-right: 10px;
+    }
+    .el-table thead th:hover{
+      cursor: pointer;
     }
   }
 </style>

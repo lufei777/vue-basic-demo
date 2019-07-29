@@ -142,7 +142,13 @@
       initChart(res){
         this.myChart = echarts.init(this.$refs.myChart);
         let titleText =`A3${this.energyNameList}趋势对比`
-        let xAxis= res[0].map((item)=>item.time.slice(0,10))
+        let xAxis = []
+        if(this.selectType==3 && this.radioType==0){
+          xAxis= res[0].map(item=>item.time?item.time.slice(0,16):'')
+        }else{
+          xAxis= res[0].map(item=>item.time?item.time.slice(0,10):'')
+        }
+        console.log(xAxis)
         let legendData = this.energyNameList.split("与")
         let yAxis =  res[0] && res[0][0] && res[0][0].unit
         let series=[]

@@ -138,6 +138,7 @@
       async getTbhbChart(){
         let res = await CommonApi.getTbhbChart(this.commonParams)
         this.initChart(res)
+        
       },
       async getTbhbTable(){
         let tableParams = {...this.commonParams,...{
